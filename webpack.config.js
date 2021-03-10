@@ -1,3 +1,4 @@
+const { AngularCompilerPlugin } = require('@ngtools/webpack');
 const path = require('path');
 
 module.exports = {
@@ -16,4 +17,10 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new AngularCompilerPlugin({
+      directTemplateLoading: true,
+      tsConfigPath: path.join(__dirname, './tsconfig.app.json'),
+    }),
+  ],
 };
