@@ -1,27 +1,17 @@
 # CustomWebpackInjectModule
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
+Reproduction repository to inject modules with a Webpack loader
 
-## Development server
+The issue seems to be that even though I update the source to include the HelloModule inside the imports array of the AppModule's NgModule decorator, it doesn't seem to be included in the build output.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+To verify this, run `npm install` to install the Node dependencies and run `ng serve` to start the dev server or `ng build --prod` to run a production build
 
-## Code scaffolding
+## Expected
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* When the app loads, there should be a log in the browser console saying 'hello from the appHello directive'.
+* After running a production build, inside `dist/custom-webpack-inject-module/main.js`, there is one instance of './hello/hello.module' as a comment.
 
-## Build
+## Actual
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+* When the app loads, there isn't a log in the browser console saying 'hello from the appHello directive'.
+* After running a production build, inside `dist/custom-webpack-inject-module/main.js`, there isn't an instance of './hello/hello.module' as a comment (meaning the HelloModule isn't being imported).
